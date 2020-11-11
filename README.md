@@ -51,3 +51,8 @@ _scrollToIndexController.to(6);
 ```dart
 _scrollToIndexController.dispose();
 ```
+
+##### 数组
+```dart
+final List<TestObject> objs = List.generate(20, (index) => TestObject("典典${index + 1}", 22 + index));
+```

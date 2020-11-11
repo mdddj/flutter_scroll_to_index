@@ -1,8 +1,7 @@
 name: flutter_scroll_to_index
 description: flutter滚动组件封装
 version: 0.0.1
-author:
-homepage:
+homepage: https://github.com/mdddj/flutter_scroll_to_index
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
