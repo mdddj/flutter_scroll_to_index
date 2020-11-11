@@ -1,5 +1,7 @@
 # flutter_scroll_to_index
 
+[![pub](https://badgen.net/pub/v/flutter_scroll_to_index)](https://pub.dev/packages/flutter_scroll_to_index)
+
 ### flutter滚动组件
 Listview 滑动到指定item,类似于定位功能
 
