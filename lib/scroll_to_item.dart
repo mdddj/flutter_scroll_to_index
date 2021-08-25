@@ -3,15 +3,14 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_scroll_to_index/scroll_to_index_base.dart';
 
-// 滑动到指定位置组件
 class ScrollToIndex extends StatefulWidget {
   final IndexedWidgetBuilder itemBuilder;
   final List<ScrollToIndexBaseObject> list;
-  final Duration duration;
+  final Duration? duration;
   final double topDistance;
-  final ScrollToIndexController controller;
+  final ScrollToIndexController? controller;
 
-  const ScrollToIndex({Key key, @required this.list, this.duration, this.topDistance = 0, @required this.controller, @required this.itemBuilder}) : super(key: key);
+  const ScrollToIndex({Key? key, required this.list, this.duration, this.topDistance = 0, required this.controller, required this.itemBuilder}) : super(key: key);
 
   @override
   _ScrollToIndexState createState() => _ScrollToIndexState();
@@ -29,9 +28,7 @@ class _ScrollToIndexState extends State<ScrollToIndex> {
 
   // 绑定控制器
   void _bindController() {
-    if (widget.controller != null) {
-      widget.controller._bind(this);
-    }
+    widget.controller?._bind(this);
   }
 
   @override
@@ -56,15 +53,15 @@ class _ScrollToIndexState extends State<ScrollToIndex> {
     }
   }
 
+  // 滑动到指定下标的item
   void scrollToIndex(int index) {
     if (index > widget.list.length) {
       return;
     }
-    print("scroll to index - $index");
     ScrollToIndexBaseObject item = widget.list[index];
     if (item.globalKey.currentContext != null) {
-      RenderBox renderBox = item.globalKey.currentContext.findRenderObject();
-      double dy = renderBox.localToGlobal(Offset.zero, ancestor: _scrollKey.currentContext.findRenderObject()).dy;
+      RenderBox renderBox = item.globalKey.currentContext!.findRenderObject() as RenderBox;
+      double dy = renderBox.localToGlobal(Offset.zero, ancestor: _scrollKey.currentContext!.findRenderObject()).dy;
       var offset = dy + _scrollController.offset;
       double stateTopHei = MediaQueryData.fromWindow(window).padding.top;
       _scrollController.animateTo(offset - stateTopHei - widget.topDistance, duration: widget.duration ?? Duration(milliseconds: 500), curve: Curves.linear);
@@ -81,11 +78,11 @@ class _ScrollToIndexState extends State<ScrollToIndex> {
 }
 
 class ScrollToIndexController {
-  _ScrollToIndexState _scrollToIndexState;
+  _ScrollToIndexState? _scrollToIndexState;
 
   /// 滑动到指定位置
   void to(int index) {
-    _scrollToIndexState.scrollToIndex(index);
+    _scrollToIndexState!.scrollToIndex(index);
   }
 
   void dispose() {
