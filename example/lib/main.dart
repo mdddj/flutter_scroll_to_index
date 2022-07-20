@@ -4,5 +4,5 @@ import 'test_page.dart';
 
 
 void main() {
-  runApp(ScrollToIndexTestPage());
+  runApp(MaterialApp(home: ScrollToIndexTestPage(),));
 }
